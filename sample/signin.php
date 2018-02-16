@@ -1,5 +1,5 @@
 <?php
-include("config.php")
+include("pdoConn.php")
 session_start();
 
 if($_SERVER["REQUEST_METHOD"] == "POST") //this is looking at the html and getting the username and password from form
