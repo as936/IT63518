@@ -3,7 +3,7 @@ $host = 'localhost';
 $user = 'root'; //username and password of database being used follows here
 $password = 'password';
 $db = 'it63518';
-$options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');			
+//$options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');			
 $conn = new PDO("mysql:host=$host;dbname=$db",$user,$password);	//connection is made in this statement.
 try																	
 {
