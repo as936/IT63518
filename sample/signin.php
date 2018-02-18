@@ -4,28 +4,33 @@ include("pdoConn.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST") //this is looking at the html and getting the username and password from form
 {
-	$username = mysqli_real_escape_string($db,$_POST['username']);
-	$password = mysqli_real_escape_string($db,$_POST['password']);
-	
-	$sqlquery = "Select * from users where name = '$username' and password = '$password'";
-	$result = mysqli_query($db,$sqlquery);
-	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-	
-	$count = mysqli_num_rows($result);
-	
-	if($count == 1)
-	{
-		session_register("myusername");
-		$_SESSION['login_user'] = $username;
-		
-		$success = "Successfully Logged In";
+	$username = ($_POST['username']) ;
+	$password = ($_POST['password']);
 
-		header("location: welcomepage.php"); //sending to the landing page after you log in
-	}
-		
-	else {
-		$error = "Your Login Name or Password is invalid";
-	}
+	$sql = "SELECT * FROM users WHERE name = :username and password = :password";
+	$stmt = $conn->prepare($sql);
+
+
+
+	$stmt->bindParam(':username', $username);
+	$stmt->bindParam(':password', $password);
+
+	$stmt->execute();
+
+	$result = $stmt->fetchAll();
+
+if($result){
+
+	echo "Login Successful";
+	$_SESSION["username"]=$username;
+	header("location: welcomepage.html");
+}else{
+
+	echo "Login Failed";	
+}
+
+	
+
 }
 
 ?>
