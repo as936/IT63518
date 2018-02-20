@@ -23,7 +23,7 @@ if($result){
 
 	echo "Login Successful";
 	$_SESSION["username"]=$username;
-	header("location: welcomepage.html");
+	header("location: welcomepage.php");
 }else{
 
 	echo "Login Failed";	
