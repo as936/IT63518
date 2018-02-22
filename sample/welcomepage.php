@@ -1,3 +1,12 @@
+<?php
+session_start();
+if($_SESSION["username"]=""){
+	//header("location: welcomepage.php");
+	var_dump($_SESSION);	
+
+}
+
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -90,7 +99,7 @@
           </div>
 
           <h2>Filter Status</h2>
-	 <select id='status' name='status'>
+	 <select id='status' onchange="myFunction()">
 		<option value="">Please Select..</option>
 		<option value='1'>open</option>
 		<option value='2'>In Progress</option>
@@ -136,24 +145,34 @@
     <!--Function for Grabbing Table Data
     ================================================== -->
 <script>
+class myFunction() {
 
-$(document).ready(function($) {
-  $('table').hide();
-  $('#status').change(function() {
-    $('table').show();
-    var selection = $(this).val();
-    var dataset = $('#myTable tbody').find('tr');
-    // show all rows first
-    dataset.show();
-    // filter the rows that should be hidden
-    dataset.filter(function(index, item) {
-      return $(item).find('td:first-child').text().split(',').indexOf(selection) === -1;
-    }).hide();
+ $('#status').change(function() {
+var that = this;
+        $.each($('tr'),
+        function(i, val) {
+            if ($(val).text().indexOf($(that).val()) == -1) {
+                $('#data_fm_op').animate({
+                    marginTop: 0
+                },
+                50,
+                function() {
+                    $(this).find('tr').eq(i).hide();
+                });
+            } else {
+                $('#data_fm_op').animate({
+                    marginTop: 0
+                },
+                50,
+                function() {
+                    $(this).find('tr').eq(i).show();
+                });
+            }
+        });
+    });
+    </script>
 
-  });
-});
 
-</script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
