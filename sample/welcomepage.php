@@ -16,6 +16,7 @@
   </head>
 
   <body>
+	
   <?php
 	include("table.php");
   ?>
@@ -77,10 +78,10 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
+            <h1 class="h2">List of Tickets</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Edit Tickets</button>
+               
               </div>
               <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
                 Create Ticket
@@ -88,20 +89,28 @@
             </div>
           </div>
 
-          <h2>Section title</h2>
+          <h2>Filter Status</h2>
+	 <select id='status' name='status'>
+		<option value="">Please Select..</option>
+		<option value='1'>open</option>
+		<option value='2'>In Progress</option>
+		<option value='3'>Closed</option>
+		<option value='4'>Completed</option>
+	</select>
           <div class="table-responsive">
-            <table class="table table-striped table-sm">
+            <table id="myTable" class="table table-striped table-sm">
               <thead>
                 <tr>
                   <th>Ticket Id#</th>
-				   <th>Subject</th>
+		  <th>Subject</th>
                   <th>Description</th>
                   <th>Status</th>
-				  <th>Assigned To</th>
+		  <th>Assigned To</th>
                 </tr>
               </thead>
               <tbody>
-			         <?php
+       <?php
+	$j=0;
           while( $i > 0 ){
             echo
             "<tr>
@@ -109,13 +118,14 @@
               <td>{$results[$j]['subject']}</td>
               <td>{$results[$j]['description']}</td>
               <td>{$results[$j]['status']}</td>
-              <td>{$results[$j]['assignedTo']}</td>
+              <td>{$results[$j]['id']}</td>
+	      <td><button id=editButton  class=editbtn>Edit</button></td>
             </tr></br>";
 		$i--;
 		$j++;
           }
         ?>
-           
+         <div id="editButton"><a href="edit.php"></a></div>  
               </tbody>
             </table>
           </div>
@@ -124,17 +134,26 @@
     </div>
 
     <!--Function for Grabbing Table Data
-    ================================================== 
-    <script>
-	function myFunction() 
-	{
-		alert("Page is loaded");
-		  $(function() {
-            location.href = 'table.php?;
-        });
-	}
-    </script>
+    ================================================== -->
+<script>
 
+$(document).ready(function($) {
+  $('table').hide();
+  $('#status').change(function() {
+    $('table').show();
+    var selection = $(this).val();
+    var dataset = $('#myTable tbody').find('tr');
+    // show all rows first
+    dataset.show();
+    // filter the rows that should be hidden
+    dataset.filter(function(index, item) {
+      return $(item).find('td:first-child').text().split(',').indexOf(selection) === -1;
+    }).hide();
+
+  });
+});
+
+</script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -150,36 +169,3 @@
       feather.replace()
     </script>
 
-    <!-- Graphs -->
- <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-    <script>
-      var ctx = document.getElementById("myChart");
-      var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          datasets: [{
-            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-            lineTension: 0,
-            backgroundColor: 'transparent',
-            borderColor: '#007bff',
-            borderWidth: 4,
-            pointBackgroundColor: '#007bff'
-          }]
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: false
-              }
-            }]
-          },
-          legend: {
-            display: false,
-          }
-        }
-      });-->
-    </script>
-  </body>
-</html>
