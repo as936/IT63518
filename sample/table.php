@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('pdoConn.php');
 
 $query = 'Select * from tickets';

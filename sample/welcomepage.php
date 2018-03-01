@@ -1,9 +1,10 @@
 <?php
-session_start();
-if($_SESSION["username"]=""){
-	//header("location: welcomepage.php");
-	var_dump($_SESSION);	
-
+if(session_status() == PHP_SESSION_NONE){
+	session_start();
+}
+if(!isset($_SESSION["username"])){
+      	 header("location: signin.html");
+        exit(0);
 }
 
 ?>
@@ -92,19 +93,20 @@ if($_SESSION["username"]=""){
               <div class="btn-group mr-2">
                
               </div>
-              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle"><a href="createTicket.php">
                 Create Ticket
+		</a>
               </button>
             </div>
           </div>
 
           <h2>Filter Status</h2>
-	 <select id='status' onchange="myFunction()">
-		<option value="">Please Select..</option>
-		<option value='1'>open</option>
-		<option value='2'>In Progress</option>
-		<option value='3'>Closed</option>
-		<option value='4'>Completed</option>
+	 <select id='status' onchange="myFunction(this.value)">
+		<option value='0'>Please Select..</option>
+		<option value='open'>open</option>
+		<option value='In Progress'>In Progress</option>
+		<option value='Closed'>Closed</option>
+		<option value='Completed'>Completed</option>
 	</select>
           <div class="table-responsive">
             <table id="myTable" class="table table-striped table-sm">
@@ -128,13 +130,14 @@ if($_SESSION["username"]=""){
               <td>{$results[$j]['description']}</td>
               <td>{$results[$j]['status']}</td>
               <td>{$results[$j]['id']}</td>
-	      <td><button id=editButton  class=editbtn>Edit</button></td>
+	      <td><button id=editButton  class=editbtn><a> href=edit.php>Edit</a></button></td>
+		<td><button id=createButton  class=createbtn>Create Subticket</button></td>
             </tr></br>";
 		$i--;
 		$j++;
           }
         ?>
-         <div id="editButton"><a href="edit.php"></a></div>  
+        <!-- <div id="editButton"><a href="edit.php"></a></div>-->  
               </tbody>
             </table>
           </div>
@@ -145,32 +148,30 @@ if($_SESSION["username"]=""){
     <!--Function for Grabbing Table Data
     ================================================== -->
 <script>
-class myFunction() {
+function myFunction(filter) {
 
- $('#status').change(function() {
-var that = this;
-        $.each($('tr'),
-        function(i, val) {
-            if ($(val).text().indexOf($(that).val()) == -1) {
-                $('#data_fm_op').animate({
-                    marginTop: 0
-                },
-                50,
-                function() {
-                    $(this).find('tr').eq(i).hide();
-                });
-            } else {
-                $('#data_fm_op').animate({
-                    marginTop: 0
-                },
-                50,
-                function() {
-                    $(this).find('tr').eq(i).show();
-                });
-            }
-        });
-    });
-    </script>
+
+var table = document.getElementById("myTable");
+var rows = table.getElementsByTagName("tr");
+for (var i = 1; i<rows.length; i++) {
+
+	data = rows[i].getElementsByTagName("td")[3].innerHTML;
+
+	if(filter == 0){
+	rows[i].style.display = "";
+	}
+
+	 else if(data == filter){
+	     rows[i].style.display = "";
+	}
+	else{
+	 rows[i].style.display = "none";
+	}
+
+}
+}
+
+</script>
 
 
     <!-- Bootstrap core JavaScript
