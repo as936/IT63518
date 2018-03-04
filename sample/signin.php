@@ -7,24 +7,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST") //this is looking at the html and getti
 	$username = ($_POST['username']) ;
 	$password = ($_POST['password']);
 
-	$sql = "SELECT * FROM users WHERE name = :username and password = :password";
+	$sql = "SELECT name, password, role  FROM users WHERE name = :username and password = :password";
+
 	$stmt = $conn->prepare($sql);
-
-
+	
 
 	$stmt->bindParam(':username', $username);
 	$stmt->bindParam(':password', $password);
-
 	$stmt->execute();
+		
 
 	$result = $stmt->fetchAll();
 
+
+
+	
 if($result){
 
 	echo "Login Successful";
 	$_SESSION["username"]=$username;
+
+	if($result[0]["role"] == "admin"){
 	header("location: welcomepage.php");
-}else{
+
+	}
+	else{
+	header("location: welcompageEmployee.php");
+	}
+  	
+}
+else{
 
 	echo "Login Failed";	
 }

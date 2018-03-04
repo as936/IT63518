@@ -140,7 +140,19 @@ left:10;"
         <label for="lname">Assigned To</label>
       </div>
       <div class="col-75">
-        <input type="text" id="assignedTo" name="assignedTo" placeholder="Assigned To">
+	<select id="assignedTo" name="assignedTo">
+	<?php
+	include('assign.php');
+	$j=0
+
+	while($i > 0){
+	echo "<option value=".$result[$j]['name'].">" .$result[$j]['name']."</option>";
+	
+	$i--;
+	$j++;
+	}
+?> 
+</select>
       </div>
     </div>
     <div class="row">
@@ -149,7 +161,7 @@ left:10;"
       </div>
       <div class="col-75">
         <select id="status" name="status">
-          <option value="status">Open</option>
+          <option value="open">Open</option>
         </select>
       </div>
     </div>
