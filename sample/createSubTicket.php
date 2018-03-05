@@ -116,9 +116,17 @@ left:10;"
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 
-<h2>Create Ticket</h2>
+<h2>Create Sub-Ticket</h2>
 <div class="container">
-<form method="POST" action="creatTicketSQL.php">
+<form method="POST" action="creatSubTicketSQL.php">
+<div class="row">
+ <div class="col-25">
+  <label for="fname">Sub-Ticket</label>
+	</div>
+	<div class="col-75">
+	<input type="text" id="subTicketID" name="subTicketID" value="Sub-Ticket ID" readonly>
+	</div>
+	</div>
     <div class="row">
       <div class="col-25">
         <label for="fname">Ticket ID</label>

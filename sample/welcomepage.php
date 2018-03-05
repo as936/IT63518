@@ -129,9 +129,10 @@ if(!isset($_SESSION["username"])){
               <td>{$results[$j]['subject']}</td>
               <td>{$results[$j]['description']}</td>
               <td>{$results[$j]['status']}</td>
-              <td>{$results[$j]['id']}</td>
-	      <td><button id=editButton  class=editbtn><a> href=edit.php>Edit</a></button></td>
-		<td><button id=createButton  class=createbtn>Create Subticket</button></td>
+              <td>{$results[$j]['assignedTo']}</td>
+	      <td><button id=editButton  class=editbtn onclick=getTable()>
+		<a href=#>Edit</a></button></td>
+		<td><button id=createButton  class=createbtn><a href=createSubTicket.php>Create Subticket</a></button></td>
             </tr></br>";
 		$i--;
 		$j++;
@@ -173,7 +174,29 @@ for (var i = 1; i<rows.length; i++) {
 
 </script>
 
+<script>
+function getTable(){
 
+var htmlTable = document.getElementById('myTable');
+
+var rowLength = htmlTable.rows.length;
+
+for(i = 0; i < rowLength; i++){
+	var htmlCells = htmlTable.rows.item(i).cells;
+	var cellLength = htmlCells.length;
+	
+	for(var j = 0; j < cellLength; j++){
+		
+		var cellVal = htmlCells.item(j).innerHTML;
+	//	alert(cellVal);		
+		}
+
+	}	
+	window.location.href = '/sample/edit.php';
+
+}
+
+</script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

@@ -1,6 +1,6 @@
 <?php
 include('pdoConn.php');
-$query = 'Select name  from users';
+$query = 'Select name from users';
 $sqlquery = $conn->prepare($query);
 $result = $sqlquery->execute();
 $results = array();
