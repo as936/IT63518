@@ -108,7 +108,7 @@ if(!isset($_SESSION["username"])){
 		<option value='Closed'>Closed</option>
 		<option value='Completed'>Completed</option>
 	</select>
-          <div class="table-responsive">
+	 <div class="table-responsive">
             <table id="myTable" class="table table-striped table-sm">
               <thead>
                 <tr>
@@ -130,7 +130,45 @@ if(!isset($_SESSION["username"])){
               <td>{$results[$j]['description']}</td>
               <td>{$results[$j]['status']}</td>
               <td>{$results[$j]['assignedTo']}</td>
-	      <td><button id=editButton  class=editbtn onclick=getTable()>
+	      <td><button id=editButton  class=editbtn onclick=getTable(this.parentNode.parentNode)>
+		<a href=#>Edit</a></button></td>
+		<td><button id=createButton  class=createbtn><a href=createSubTicket.php>Create Subticket</a></button></td>
+            </tr></br>";
+		$i--;
+		$j++;
+          }
+        ?>
+       
+              </tbody>
+            </table>
+          </div>
+
+<div class="table-responsive">
+            <table id="myTable" class="table table-striped table-sm">
+              <thead>
+                <tr>
+		  <th>Sub-Ticket Id#</td>
+                  <th>Ticket Id#</th>
+		  <th>Subject</th>
+                  <th>Description</th>
+                  <th>Status</th>
+		  <th>Assigned To</th>
+                </tr>
+              </thead>
+              <tbody>
+       <?php
+	include('subTicketTable.php');
+	$j=0;
+          while( $i > 0 ){
+            echo
+            "<tr>
+	      <td>{$results[$j]['subTicketID']}</td>
+              <td>{$results[$j]['ticketID']}</td>
+              <td>{$results[$j]['subject']}</td>
+              <td>{$results[$j]['description']}</td>
+              <td>{$results[$j]['status']}</td>
+              <td>{$results[$j]['assignedTo']}</td>
+	      <td><button id=editButton  class=editbtn onclick=getTable(this.parentNode.parentNode)>
 		<a href=#>Edit</a></button></td>
 		<td><button id=createButton  class=createbtn><a href=createSubTicket.php>Create Subticket</a></button></td>
             </tr></br>";
@@ -175,24 +213,19 @@ for (var i = 1; i<rows.length; i++) {
 </script>
 
 <script>
-function getTable(){
+function getTable($rowData){
 
-var htmlTable = document.getElementById('myTable');
+alert(typeof $rowData);
 
-var rowLength = htmlTable.rows.length;
-
-for(i = 0; i < rowLength; i++){
-	var htmlCells = htmlTable.rows.item(i).cells;
-	var cellLength = htmlCells.length;
-	
-	for(var j = 0; j < cellLength; j++){
 		
-		var cellVal = htmlCells.item(j).innerHTML;
-	//	alert(cellVal);		
-		}
 
-	}	
-	window.location.href = '/sample/edit.php';
+		$_SESSION['ticketID'] = $rowData.cells[0].innerHTML;
+		$_SESSION['subject'] = $rowData.cells[1].innerHTML;
+		$_SESSION['description'] = $rowData.cells[2].innerHTML;
+		$_SESSION['status'] = $rowData.cells[3].innerHTML;
+		alert('going to redirect');		
+		window.location.href= '/sample/edit.php';
+			
 
 }
 

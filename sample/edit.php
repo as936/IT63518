@@ -1,12 +1,3 @@
-<?php
-
-echo "it works";
-
-
-
-?>
-
-<!DOCTYPE html>
 <html>
 <head>
 <!-- Bootstrap core CSS -->
@@ -91,7 +82,7 @@ h1{
 <body>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
 <div style = "font-size:200px;">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="test.html">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="welcomepage.php">
 	  <span data-feather="home"></span>IT DEFECTS<span class="sr-only">(current)</span>
 	  </a>
 	</div>
@@ -117,7 +108,7 @@ h1{
 	
 <h2>Edit Ticket</h2>
 <div class="container">
-  <form action="/action_page.php">
+  <form action="updateTable.php">
     <div class="row">
       <div class="col-25">
         <label for="fname">Ticket ID</label>
@@ -134,20 +125,7 @@ h1{
         <input type="text" id="subject" name="subject" placeholder="Subject">
       </div>
     </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="country">Status</label>
-      </div>
-      <div class="col-75">
-        <select id="status" name="status">
-          <option value="australia">Open</option>
-          <option value="canada">In Progress</option>
-          <option value="usa">Closed</option>
-		   <option value="usa">Complete</option>
-        </select>
-      </div>
-    </div>
-	 <div class="row">
+   	 <div class="row">
       <div class="col-25">
         <label for="description">Description</label>
       </div>
