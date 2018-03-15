@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$status = ($_POST['status']);
 	$description = ($_POST['description']);
 		
-	$sql = "INSERT INTO tickets(subject, description, status, assignedTo) VALUES(:subject, :description, :status, :assignedTo)";
+	$sql = "INSERT INTO tickets(subject, description, status, assignedTo, comments) VALUES(:subject, :description, :status, :assignedTo, ' ')";
  
         $stmt = $conn->prepare($sql);
 

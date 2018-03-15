@@ -111,26 +111,23 @@ h1{
   <form action="updateTable.php">
     <div class="row">
       <div class="col-25">
-        <label for="fname">Ticket ID</label>
+        <label for="ticketID">Ticket ID</label>
       </div>
       <div class="col-75">
-        <input type="text" id="ticketID" name="ticketID" placeholder="Ticket ID">
+        <input type="number" id="ticketID" name="ticketID" placeholder="Ticket ID">
       </div>
     </div>
-    <div class="row">
+ <div class="row">
       <div class="col-25">
-        <label for="lname">Subject</label>
+        <label for="status">Status</label>
       </div>
       <div class="col-75">
-        <input type="text" id="subject" name="subject" placeholder="Subject">
-      </div>
-    </div>
-   	 <div class="row">
-      <div class="col-25">
-        <label for="description">Description</label>
-      </div>
-      <div class="col-75">
-        <textarea id="description" name="description" placeholder="Write something.." style="height:100px"></textarea>
+        <select id="status" name="status">
+	<option value="open">Open</option>
+	<option value="In Progress">In Progress</option>
+	<option value="Closed">Closed</option>
+	<option value="Completed">Completed</option>
+	</select>
       </div>
     </div>
     <div class="row">

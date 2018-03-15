@@ -52,7 +52,7 @@ if(!isset($_SESSION["username"])){
 	>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#" ><strong>Sign out</strong></a>
+          <a class="nav-link" href="signout.php" ><strong>Sign out</strong></a>
         </li>
       </ul>
 	  </div>
@@ -130,8 +130,7 @@ if(!isset($_SESSION["username"])){
               <td>{$results[$j]['description']}</td>
               <td>{$results[$j]['status']}</td>
               <td>{$results[$j]['assignedTo']}</td>
-	      <td><button id=editButton  class=editbtn onclick=getTable(this.parentNode.parentNode)>
-		<a href=#>Edit</a></button></td>
+	      <td><button id=editButton  class=editbtn><a href=edit.php>Edit</a></button></td>
 		<td><button id=createButton  class=createbtn><a href=createSubTicket.php>Create Subticket</a></button></td>
             </tr></br>";
 		$i--;
@@ -169,9 +168,7 @@ if(!isset($_SESSION["username"])){
               <td>{$results[$j]['status']}</td>
               <td>{$results[$j]['assignedTo']}</td>
 	      <td><button id=editButton  class=editbtn onclick=getTable(this.parentNode.parentNode)>
-		<a href=#>Edit</a></button></td>
-		<td><button id=createButton  class=createbtn><a href=createSubTicket.php>Create Subticket</a></button></td>
-            </tr></br>";
+		<a href=#>Edit</a></button></td>";
 		$i--;
 		$j++;
           }
@@ -214,8 +211,8 @@ for (var i = 1; i<rows.length; i++) {
 
 <script>
 function getTable($rowData){
+session_start();
 
-alert(typeof $rowData);
 
 		
 
@@ -224,7 +221,7 @@ alert(typeof $rowData);
 		$_SESSION['description'] = $rowData.cells[2].innerHTML;
 		$_SESSION['status'] = $rowData.cells[3].innerHTML;
 		alert('going to redirect');		
-		window.location.href= '/sample/edit.php';
+		header('location:edit.php');
 			
 
 }
