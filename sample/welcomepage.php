@@ -32,21 +32,10 @@ if(!isset($_SESSION["username"])){
   ?>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">IT DEFECTS</a>
-	   <div  style = "width:70px;
-	height:auto;
-	text-align:center;
-	top:20;
-	position:absolute;
-	right:100;"
-	>
-	   <fieldset style ="width:200%">
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-	  </fieldset>
-	</div>
 	<div  style = "width:70px;
 	height:auto;
 	text-align:center;
-	top:70;
+	top:15;
 	position:absolute;
 	right:60;"
 	>
@@ -85,7 +74,7 @@ if(!isset($_SESSION["username"])){
             </h6>
           </div>
         </nav>
-
+	<h1 class="h1">Admin</h1>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">List of Tickets</h1>
