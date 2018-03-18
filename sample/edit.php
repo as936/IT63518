@@ -1,3 +1,13 @@
+<?php
+if(session_status() == PHP_SESSION_NONE){
+        session_start();
+}
+if(!isset($_SESSION["username"])){
+         header("location: signin.html");
+        exit(0);
+}
+?>
+
 <html>
 <head>
 <!-- Bootstrap core CSS -->
@@ -108,13 +118,32 @@ h1{
 	
 <h2>Edit Ticket</h2>
 <div class="container">
-  <form action="updateTable.php">
+  <form method="POST" action="updateTable.php">
     <div class="row">
       <div class="col-25">
         <label for="ticketID">Ticket ID</label>
       </div>
       <div class="col-75">
-        <input type="number" id="ticketID" name="ticketID" placeholder="Ticket ID">
+        <input type="text" id="ticketID" name="ticketID" placeholder="Ticket ID" required>
+      </div>
+    </div>
+ <div class="row">
+      <div class="col-25">
+        <label for="lname">Assigned To</label>
+      </div>
+      <div class="col-75">
+	<select id="assignedTo" name="assignedTo">
+	<?php
+	include('assign.php');
+	$j=0;
+	while($i > 0){
+	echo "<option value=".$results[$j]['name'].">" .$results[$j]['name']."</option>";
+	
+	$i--;
+	$j++;
+	}
+?> 
+</select>
       </div>
     </div>
  <div class="row">
@@ -135,7 +164,7 @@ h1{
         <label for="comments">Comments</label>
       </div>
       <div class="col-75">
-        <textarea id="comments" name="comments" placeholder="Write something.." style="height:100px"></textarea>
+        <textarea id="comments" name="comments" placeholder="Write something.." style="height:100px" required></textarea>
       </div>
     </div>
 	

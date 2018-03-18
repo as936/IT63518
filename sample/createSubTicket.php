@@ -132,7 +132,7 @@ left:10;"
         <label for="fname">Ticket ID</label>
       </div>
       <div class="col-75">
-        <input type="text" id="ticketID" name="ticketID" value="Ticket ID" readonly>
+        <input type="text" id="ticketID" name="ticketID" required>
       </div>
     </div>
     <div class="row">
@@ -140,7 +140,7 @@ left:10;"
         <label for="lname">Subject</label>
       </div>
       <div class="col-75">
-        <input type="text" id="subject" name="subject" placeholder="Subject">
+        <input type="text" id="subject" name="subject" placeholder="Subject" required>
       </div>
     </div>
 	 <div class="row">
@@ -178,7 +178,7 @@ left:10;"
         <label for="description">Description</label>
       </div>
       <div class="col-75">
-        <textarea id="description" name="description" placeholder="Write something.." style="height:100px"></textarea>
+        <textarea id="description" name="description" placeholder="Write something.." style="height:100px" required></textarea>
       </div>
     </div>	
     <div class="row">

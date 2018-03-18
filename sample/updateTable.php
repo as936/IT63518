@@ -7,19 +7,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$ticketID = ($_POST['ticketID']);
         $comments = ($_POST['comments']);
 	$status = ($_POST['status']);
+	$assignedTo = ($_POST['assignedTo']);
+
 		
-	$sql = "UPDATE tickets SET status= :status, comments= :comments WHERE ticketID= :ticketID";
+	$sql = "UPDATE tickets SET status= :status, comments= :comments, assignedTo= :assignedTo WHERE ticketID= :ticketID";
  
         $stmt = $conn->prepare($sql);
-
 
 	$stmt->bindParam(':ticketID', $ticketID);
         $stmt->bindParam(':comments', $comments);
         $stmt->bindParam(':status', $status);
-		
-        $stmt->execute();
+	$stmt->bindParam(':assignedTo', $assignedTo);
 
-//        $result = $stmt->fetchAll();
+
+
+	
+        $stmt->execute();
 
 header("location: welcomepage.php");
 }

@@ -52,7 +52,7 @@ if(!isset($_SESSION["username"])){
 	>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#" ><strong>Sign out</strong></a>
+          <a class="nav-link" href="signout.php" ><strong>Sign out</strong></a>
         </li>
       </ul>
 	  </div>
@@ -89,16 +89,16 @@ if(!isset($_SESSION["username"])){
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">List of Tickets</h1>
-
-
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
                
-
-
-
-
-
-
-
+              </div>
+           	<button class="btn btn-sm btn-outline-secondary dropdown-toggle"><a href="edit.php">Edit Ticket</a>
+		</button>
+		 <button class="btn btn-sm btn-outline-secondary dropdown-toggle"><a href="createSubTicket.php">Create Sub-Ticket</a>
+                </button>
+            </div>
+          </div>
 
           <h2>Filter Status</h2>
 	 <select id='status' onchange="myFunction(this.value)">
@@ -117,6 +117,7 @@ if(!isset($_SESSION["username"])){
                   <th>Description</th>
                   <th>Status</th>
 		  <th>Assigned To</th>
+   	          <th>Comments</th>
                 </tr>
               </thead>
               <tbody>
@@ -130,10 +131,8 @@ if(!isset($_SESSION["username"])){
               <td>{$results[$j]['description']}</td>
               <td>{$results[$j]['status']}</td>
               <td>{$results[$j]['assignedTo']}</td>
-	      <td><button id=editButton  class=editbtn onclick=getTable(this.parentNode.parentNode)>
-		<a href=#>Edit</a></button></td>
-		<td><button id=createButton  class=createbtn><a href=createSubTicket.php>Create Subticket</a></button></td>
-            </tr></br>";
+	      <td>{$results[$j]['comments']}</td>
+	      </tr></br>";
 		$i--;
 		$j++;
           }
@@ -153,6 +152,7 @@ if(!isset($_SESSION["username"])){
                   <th>Description</th>
                   <th>Status</th>
 		  <th>Assigned To</th>
+		  <th>Comments</th>
                 </tr>
               </thead>
               <tbody>
@@ -168,9 +168,8 @@ if(!isset($_SESSION["username"])){
               <td>{$results[$j]['description']}</td>
               <td>{$results[$j]['status']}</td>
               <td>{$results[$j]['assignedTo']}</td>
-	      <td><button id=editButton  class=editbtn onclick=getTable(this.parentNode.parentNode)>
-		<a href=#>Edit</a></button></td>";
-		$i--;
+		</tr>";
+	 	$i--;
 		$j++;
           }
         ?>
@@ -210,24 +209,6 @@ for (var i = 1; i<rows.length; i++) {
 
 </script>
 
-<script>
-function getTable($rowData){
-session_start();
-
-
-		
-
-		$_SESSION['ticketID'] = $rowData.cells[0].innerHTML;
-		$_SESSION['subject'] = $rowData.cells[1].innerHTML;
-		$_SESSION['description'] = $rowData.cells[2].innerHTML;
-		$_SESSION['status'] = $rowData.cells[3].innerHTML;
-		alert('going to redirect');		
-		header('location:edit.php');
-			
-
-}
-
-</script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
