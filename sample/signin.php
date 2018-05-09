@@ -7,13 +7,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") //this is looking at the html and getti
 	$username = ($_POST['username']) ;
 	$password = ($_POST['password']);
 
-	$sql = "SELECT name, password, role  FROM users WHERE name = :username and password = :password";
+//	$sql = "SELECT name, password, role  FROM users WHERE name = :username and password = :password";
 
+	$sql = 'CALL get_users2(?,?)';
 	$stmt = $conn->prepare($sql);
 	
 
-	$stmt->bindParam(':username', $username);
-	$stmt->bindParam(':password', $password);
+//	$stmt->bindParam(':username', $username);
+//	$stmt->bindParam(':password', $password);
+
+	$stmt->bindParam(1, $username, PDO::PARAM_STR|PDO::PARAM_STR, 20);
+	$stmt->bindParam(2, $password, PDO::PARAM_STR, 100);
 	$stmt->execute();
 		
 
@@ -38,7 +42,10 @@ if($result){
 }
 else{
 
-	echo "Login Failed";	
+	echo "Login Failed";
+	echo $username;
+	echo $password;	
+	echo $sql;
 }
 
 	
