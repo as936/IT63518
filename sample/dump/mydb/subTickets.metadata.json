@@ -1,0 +1,1 @@
+{ "options" : { "capped" : true, "size" : 6142976, "max" : 10000, "autoIndexId" : true }, "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "name" : "_id_", "ns" : "mydb.subTickets" } ] }
